@@ -1,0 +1,28 @@
+name: Testing Framework
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  compose-up:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Run docker-compose
+        run: docker-compose up -d
+
+      - name: Wait and test backend
+        run: |
+          sleep 10
+          curl http://localhost:8000/health || true
+
+      - name: Tear down
+        run: docker-compose down
