@@ -36,3 +36,11 @@ jobs:
 
       - name: Tear down
         run: docker compose down
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: |
+            report.txt
+    
