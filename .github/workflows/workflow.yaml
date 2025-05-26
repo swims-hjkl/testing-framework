@@ -15,7 +15,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Run docker-compose
-        run: docker-compose up -d
+        run: docker compose up -d
 
       - name: Wait and test backend
         run: |
@@ -23,4 +23,4 @@ jobs:
           curl http://localhost:8000/health || true
 
       - name: Tear down
-        run: docker-compose down
+        run: docker compose down
